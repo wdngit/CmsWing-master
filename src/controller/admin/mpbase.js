@@ -1372,7 +1372,9 @@ module.exports = class extends think.cmswing.admin {
     }
     // think.log(final)
     // return false;
+    console.log(final);
     const res = await this.api.createMenu(final);
+    console.log(res);
     // let res = true;
     if (res) {
       return self.success({name: '微信菜单生成成功'});
