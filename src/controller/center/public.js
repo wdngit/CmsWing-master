@@ -69,6 +69,7 @@ module.exports = class extends think.cmswing.center {
       await this.hook('smsRegistration');
       // 第三方登录钩子
       await this.hook('logins');
+      console.log(this.mtpl());
       return this.isMobile ? this.display(this.mtpl()) : this.display();
     }
   }
