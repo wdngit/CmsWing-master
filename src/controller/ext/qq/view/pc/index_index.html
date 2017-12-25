@@ -1,63 +1,63 @@
- <html>  
-         <head>  
-            <title>QQ登录跳转</title>  
+ <html>
+         <head>
+            <title>QQ登录跳转</title>
            <script type="text/javascript" src="/static/assets/plugins/jquery/jquery-2.1.4.min.js"></script>
-              
-            <script type="text/javascript">  
-              
-            //切割字符串转换参数表  
-            function toParamMap(str){  
-                 var map = {};  
-                 var segs = str.split("&");  
-                 for(var i in segs){  
-                     var seg = segs[i];  
-                     var idx = seg.indexOf('=');  
-                     if(idx < 0){  
-                         continue;  
-                     }  
-                     var name = seg.substring(0, idx);  
-                     var value = seg.substring(idx+1);  
-                     map[name] = value;  
-                 }  
-                 return map;  
-             }  
-              
-            //隐式获取url响应内容(JSONP)  
-            function openImplict(url){  
-                var script = document.createElement('script');  
+
+            <script type="text/javascript">
+
+            //切割字符串转换参数表
+            function toParamMap(str){
+                 var map = {};
+                 var segs = str.split("&");
+                 for(var i in segs){
+                     var seg = segs[i];
+                     var idx = seg.indexOf('=');
+                     if(idx < 0){
+                         continue;
+                     }
+                     var name = seg.substring(0, idx);
+                     var value = seg.substring(idx+1);
+                     map[name] = value;
+                 }
+                 return map;
+             }
+
+            //隐式获取url响应内容(JSONP)
+            function openImplict(url){
+                var script = document.createElement('script');
                 script.src = url;
                 //alert(JSON.stringify(script))
-                document.body.appendChild(script);          
-            }  
-              
-            //获得openid的回调  
-            function callback(obj)  
-            {  
-               var openid = obj.openid;  
-               $("#openid").text(openid);  
-                 
-               //跳转服务端登录url  
+                document.body.appendChild(script);
+            }
+
+            //获得openid的回调
+            function callback(obj)
+            {
+               var openid = obj.openid;
+               $("#openid").text(openid);
+
+               //跳转服务端登录url
                var resulturl = "/ext/qq/index/loginresult";
-               var accessToken = $("#accessToken").text();  
-                 
-               //向服务端传输access_token及openid参数  
-               document.location.href=resulturl + "?access_token=" + accessToken + "&openid=" + openid;  
-            }  
-              
-              
-            </script>  
-         </head>  
-           
-         <body>  
+               var accessToken = $("#accessToken").text();
+
+               //向服务端传输access_token及openid参数
+               document.location.href=resulturl + "?access_token=" + accessToken + "&openid=" + openid;
+            }
+
+
+            </script>
+         </head>
+
+         <body>
 
                 <p><h1>正在加载......</h1></p>
                 <p style="display: none">AccessToken:<span id="accessToken"></span>--ExpireIn<span id="expire"></span></p>
                 <p style="display: none">OpenID:<span id="openid"></span></p>
-           
-         <!-- 执行脚本 -->  
-         <script type="text/javascript">  
-           
-         //应用的APPID  
+
+         <!-- 执行脚本 -->
+         <script type="text/javascript">
+
+         //应用的APPID
          var appID ="{{config.ext.qq.appid}}";
            var redirectURI;
          //登录授权后的回调地址，设置为当前url
@@ -66,8 +66,8 @@
          }else {
               redirectURI = "https://{{ctx.host}}/ext/qq/index/index";
          }
-      
-         //初始构造请求  
+
+         //初始构造请求
          if (window.location.hash.length == 0)
          {
             var path = 'https://graph.qq.com/oauth2.0/authorize?';
@@ -97,7 +97,7 @@
             var url = path + query;
             openImplict(url);
          }
-           
-         </script>  
-         </body>  
-    </html>  
+
+         </script>
+         </body>
+    </html>
