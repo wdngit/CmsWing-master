@@ -418,8 +418,10 @@
                     return
                 }
                 mui.openWindow({url: href})
-
             })
+        }
+        if(btn.length >0){
+          btn[0].tap();
         }
     });
 
